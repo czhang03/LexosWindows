@@ -1,0 +1,7 @@
+*.swp
+.vscode
+profile.json
+.vs
+packages
+obj
+bin

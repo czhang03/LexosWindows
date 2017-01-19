@@ -1,0 +1,3 @@
+[submodule "Lexos"]
+	path = Lexos
+	url = https://github.com/WheatonCS/Lexos
