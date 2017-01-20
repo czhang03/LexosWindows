@@ -12,7 +12,7 @@
 !define DESCRIPTION "Python/Flask-based website for text analysis workflow."
 !define LICENSE_TXT "..\Lexos\LICENSE"
 !define INSTALLER_NAME "LexosInstaller_${VERSION}_x64.exe"
-!define MAIN_APP_EXE "WindowsBin\LexosWindows.exe"
+!define MAIN_APP_EXE "LexosWindows.exe"
 !define MUI_ICON "..\Lexos\install\assets\Lexos.ico"
 !define INSTALL_TYPE "SetShellVarContext all"
 !define REG_ROOT "HKLM"
@@ -56,6 +56,7 @@ InstallDir "$PROGRAMFILES64\${APP_NAME}"
 !insertmacro MUI_PAGE_LICENSE "${LICENSE_TXT}"
 !endif
 
+!insertmacro MUI_DEFAULT MUI_DIRECTORYPAGE_VARIABLE $INSTDIR
 !insertmacro MUI_PAGE_DIRECTORY
 
 !ifdef REG_START_MENU
@@ -84,10 +85,10 @@ InstallDir "$PROGRAMFILES64\${APP_NAME}"
 Section -MainProgram
 ${INSTALL_TYPE}
 SetOverwrite ifnewer
-SetOutPath "$INSTDIR"
+SetOutPath "$INSTDIR\scr"
 File /nonfatal /r "..\Lexos\"
 
-SetOutPath "$INSTDIR\WindowsBin"
+SetOutPath "$INSTDIR"
 File /nonfatal /r "..\Executable\LexosWindows\bin\x64\Release\"
 
 SectionEnd
