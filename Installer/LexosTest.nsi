@@ -1,9 +1,6 @@
-############################################################################################
-#      NSIS Installation Script created by NSIS Quick Setup Script Generator v1.09.18
-#               Entirely Edited with NullSoft Scriptable Installation System                
-#              by Vlasis K. Barkas aka Red Wine red_wine@freemail.gr Sep 2006               
-############################################################################################
+######################################################################
 
+# define variable
 !define APP_NAME "Lexos"
 !define COMP_NAME "WheatonCS"
 !define WEB_SITE "http://lexos.wheatoncollege.edu/"
@@ -25,6 +22,7 @@ var SM_Folder
 
 ######################################################################
 
+# regeister information on windows
 VIProductVersion  "${VERSION}"
 VIAddVersionKey "ProductName"  "${APP_NAME}"
 VIAddVersionKey "CompanyName"  "${COMP_NAME}"
@@ -34,6 +32,7 @@ VIAddVersionKey "FileVersion"  "${VERSION}"
 
 ######################################################################
 
+# set package information
 SetCompressor ZLIB
 Name "${APP_NAME}"
 Caption "${APP_NAME}"
@@ -50,15 +49,19 @@ InstallDir "$PROGRAMFILES64\${APP_NAME}"
 !define MUI_ABORTWARNING
 !define MUI_UNABORTWARNING
 
+# welcome page
 !insertmacro MUI_PAGE_WELCOME
 
+# licnese page
 !ifdef LICENSE_TXT
 !insertmacro MUI_PAGE_LICENSE "${LICENSE_TXT}"
 !endif
 
+# directory page
 !insertmacro MUI_DEFAULT MUI_DIRECTORYPAGE_VARIABLE $INSTDIR
 !insertmacro MUI_PAGE_DIRECTORY
 
+# start menu page
 !ifdef REG_START_MENU
 !define MUI_STARTMENUPAGE_DEFAULTFOLDER "${APP_NAME}"
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT "${REG_ROOT}"
@@ -67,8 +70,10 @@ InstallDir "$PROGRAMFILES64\${APP_NAME}"
 !insertmacro MUI_PAGE_STARTMENU Application $SM_Folder
 !endif
 
+# install page
 !insertmacro MUI_PAGE_INSTFILES
 
+# finish and run
 !define MUI_FINISHPAGE_RUN "$INSTDIR\${MAIN_APP_EXE}"
 !insertmacro MUI_PAGE_FINISH
 
@@ -82,9 +87,12 @@ InstallDir "$PROGRAMFILES64\${APP_NAME}"
 
 ######################################################################
 
+# main install page
 Section -MainProgram
 ${INSTALL_TYPE}
 SetOverwrite ifnewer
+
+# extracting files
 SetOutPath "$INSTDIR\scr"
 File /nonfatal /r "..\Lexos\"
 
@@ -95,10 +103,14 @@ SectionEnd
 
 ######################################################################
 
+# finish up 
 Section -Icons_Reg
+
+# write uninstaller
 SetOutPath "$INSTDIR"
 WriteUninstaller "$INSTDIR\uninstall.exe"
 
+# put link in start menu
 !ifdef REG_START_MENU
 !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
 CreateDirectory "$SMPROGRAMS\$SM_Folder"
@@ -106,6 +118,7 @@ CreateShortCut "$SMPROGRAMS\$SM_Folder\${APP_NAME}.lnk" "$INSTDIR\${MAIN_APP_EXE
 CreateShortCut "$DESKTOP\${APP_NAME}.lnk" "$INSTDIR\${MAIN_APP_EXE}"
 CreateShortCut "$SMPROGRAMS\$SM_Folder\Uninstall ${APP_NAME}.lnk" "$INSTDIR\uninstall.exe"
 
+# create web site url
 !ifdef WEB_SITE
 WriteIniStr "$INSTDIR\${APP_NAME} website.url" "InternetShortcut" "URL" "${WEB_SITE}"
 CreateShortCut "$SMPROGRAMS\$SM_Folder\${APP_NAME} Website.lnk" "$INSTDIR\${APP_NAME} website.url"
@@ -113,6 +126,7 @@ CreateShortCut "$SMPROGRAMS\$SM_Folder\${APP_NAME} Website.lnk" "$INSTDIR\${APP_
 !insertmacro MUI_STARTMENU_WRITE_END
 !endif
 
+# This is auto generated, I don't know what this do...
 !ifndef REG_START_MENU
 CreateDirectory "$SMPROGRAMS\${APP_NAME}"
 CreateShortCut "$SMPROGRAMS\${APP_NAME}\${APP_NAME}.lnk" "$INSTDIR\${MAIN_APP_EXE}"
@@ -125,6 +139,7 @@ CreateShortCut "$SMPROGRAMS\${APP_NAME}\${APP_NAME} Website.lnk" "$INSTDIR\${APP
 !endif
 !endif
 
+# write information to registry
 WriteRegStr ${REG_ROOT} "${REG_APP_PATH}" "" "$INSTDIR\${MAIN_APP_EXE}"
 WriteRegStr ${REG_ROOT} "${UNINSTALL_PATH}"  "DisplayName" "${APP_NAME}"
 WriteRegStr ${REG_ROOT} "${UNINSTALL_PATH}"  "UninstallString" "$INSTDIR\uninstall.exe"
