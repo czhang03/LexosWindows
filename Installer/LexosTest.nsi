@@ -10,7 +10,6 @@
 !define LICENSE_TXT "..\Lexos\LICENSE"
 !define INSTALLER_NAME "LexosInstaller_${VERSION}_x64.exe"
 !define MAIN_APP_EXE "LexosWindows.exe"
-!define MUI_ICON "..\Lexos\install\assets\Lexos.ico"
 !define INSTALL_TYPE "SetShellVarContext all"
 !define REG_ROOT "HKLM"
 !define REG_APP_PATH "Software\Microsoft\Windows\CurrentVersion\App Paths\${MAIN_APP_EXE}"
@@ -48,6 +47,10 @@ InstallDir "$PROGRAMFILES64\${APP_NAME}"
 
 !define MUI_ABORTWARNING
 !define MUI_UNABORTWARNING
+
+# cutomize the images
+!define MUI_ICON "..\Lexos\install\assets\Lexos.ico"
+!define MUI_WELCOMEFINISHPAGE_BITMAP LexosTree.bmp
 
 # welcome page
 !insertmacro MUI_PAGE_WELCOME
