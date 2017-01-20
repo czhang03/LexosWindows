@@ -39,7 +39,7 @@ OutFile "${INSTALLER_NAME}"
 BrandingText "${APP_NAME}"
 ManifestDPIAware true
 InstallDirRegKey "${REG_ROOT}" "${REG_APP_PATH}" ""
-InstallDir "$PROGRAMFILES64\${APP_NAME}"
+InstallDir "$LOCALAPPDATA\${APP_NAME}"
 
 ######################################################################
 
