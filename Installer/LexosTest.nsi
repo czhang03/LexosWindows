@@ -10,6 +10,7 @@
 !define LICENSE_TXT "..\Lexos\LICENSE"
 !define INSTALLER_NAME "LexosInstaller_${VERSION}_x64.exe"
 !define MAIN_APP_EXE "LexosWindows.exe"
+!define ANACONDA_FILE "Anaconda3-4.2.0-Windows-x86_64.exe"
 !define INSTALL_TYPE "SetShellVarContext all"
 !define REG_ROOT "HKLM"
 !define REG_APP_PATH "Software\Microsoft\Windows\CurrentVersion\App Paths\${MAIN_APP_EXE}"
@@ -60,6 +61,9 @@ InstallDir "$LOCALAPPDATA\${APP_NAME}"
 !insertmacro MUI_PAGE_LICENSE "${LICENSE_TXT}"
 !endif
 
+# choose what to install page
+!insertmacro MUI_PAGE_COMPONENTS 
+
 # directory page
 !insertmacro MUI_DEFAULT MUI_DIRECTORYPAGE_VARIABLE $INSTDIR
 !insertmacro MUI_PAGE_DIRECTORY
@@ -87,6 +91,20 @@ InstallDir "$LOCALAPPDATA\${APP_NAME}"
 !insertmacro MUI_UNPAGE_FINISH
 
 !insertmacro MUI_LANGUAGE "English"
+
+######################################################################
+
+# anaconda install Section
+Section "Install Anaconda" AnacondaSec
+SetOutPath "$TEMP\LexosInstaller\${ANACONDA_FILE}"
+File "${ANACONDA_FILE}"
+ExecWait "${ANACONDA_FILE} /S /D=$\"$PROFILE\Anaconda3$\""
+SectionEnd
+
+# description of the section
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+    !insertmacro MUI_DESCRIPTION_TEXT ${AnacondaSec} "This option will let you to install Anaconda with Lexos. Anaconda is a python distribution required by lexos. $\nIf you uncheck this option, you will need to install python by yourself."
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 ######################################################################
 
