@@ -7,8 +7,6 @@ param (
     [string] $AnacondaVersion
 )
 
-# stop when hit an error
-$ErrorActionPreference = "stop"
 
 # constants
 $nsisMakeFile = "C:\Program Files (x86)\NSIS\makensis.exe"
