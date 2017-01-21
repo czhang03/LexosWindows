@@ -18,7 +18,7 @@
                 <StackPanel Name="MessagePanel" VerticalAlignment="Center">
                     
                     <TextBlock FontWeight="Bold" FontSize="20"> Following Error Encountered while initializing the app:</TextBlock>
-                    <TextBlock Name="ErrorDetailTextBlock" Margin="5" FontSize="18" FontFamily="consolas" Foreground="MediumVioletRed">ErrorType: ErrorMessage</TextBlock>
+                    <TextBlock Name="ErrorDetailTextBlock" Margin="5" FontSize="18" MaxWidth="700" FontFamily="consolas" Foreground="MediumVioletRed" TextWrapping="Wrap">ErrorType: ErrorMessage</TextBlock>
 
                     <TextBlock FontFamily="Gill Sans MT" FontSize="20">
                         If you want you can submit log and contact us through our 
@@ -40,7 +40,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             
-            <Button VerticalAlignment="Top" Name="ChromiumBack" Grid.Column="0" Click="ChromiumBack_OnClick">
+            <Button VerticalAlignment="Top" Name="ChromiumBack" Grid.Column="0" Click="ChromiumBack_OnClick" Background="Transparent" BorderBrush="Transparent">
                 <Image Source="Assets/back-button.png" Width="40"></Image>
             </Button>
             <cefSharp:ChromiumWebBrowser Grid.Column="1" Name="LexosBrowser" Address="http://127.0.0.1:5000/" Visibility="Collapsed" />

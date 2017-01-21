@@ -65,11 +65,13 @@ namespace LexosWindows
                 await Task.Run(() => TestConnectionHelper());
 
                 // display elements
+                ErrorGrid.Visibility = Visibility.Collapsed;
                 LoadingGrid.Visibility = Visibility.Collapsed;
                 AppGrid.Visibility = Visibility.Visible;
             }
             catch (Exception e)
             {
+                AppGrid.Visibility = Visibility.Collapsed;
                 LoadingGrid.Visibility = Visibility.Collapsed;
                 ErrorGrid.Visibility = Visibility.Visible;
                 ErrorDetailTextBlock.Text = $"{e.GetType()}: {e.Message}";
