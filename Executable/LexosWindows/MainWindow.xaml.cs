@@ -63,9 +63,8 @@ namespace LexosWindows
             await Task.Run(() => TestConnectionHelper());
 
             // display elements
-            InfomationTextBlock.Visibility = Visibility.Collapsed;
-            LexosBrowser.Visibility = Visibility.Visible;
-            WaitingPythonLoadingRing.Visibility = Visibility.Collapsed;
+            LoadingGrid.Visibility = Visibility.Collapsed;
+            AppGrid.Visibility = Visibility.Visible;
 
         }
 

@@ -10,6 +10,10 @@
         Title="Lexos" Height="800" Width="1200" Closing="MainWindow_OnClosing" ContentRendered="MainWindow_ContentRendered">
     <Grid>
         
+        <Grid Name="ErrorGrid" Visibility="Collapsed">
+            
+        </Grid>
+        
         <Grid Name="AppGrid"  Visibility="Collapsed">
 
             <Grid.ColumnDefinitions>
