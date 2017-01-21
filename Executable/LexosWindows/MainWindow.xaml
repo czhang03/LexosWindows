@@ -11,7 +11,21 @@
     <Grid>
         
         <Grid Name="ErrorGrid" Visibility="Collapsed">
-            
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                
+                <TextBlock> Following Error Encountered while initializing the app</TextBlock>
+                <TextBlock Name="ErrorDetailTextBlock" Margin="5" FontFamily="consolas" Foreground="MediumVioletRed">ErrorType: ErrorMessage</TextBlock>
+
+                <TextBlock>
+                    If you want you can submit log and contact us through our 
+                    <Hyperlink NavigateUri="https://github.com/chantisnake/LexosWindows/issues/new" RequestNavigate="HyperLink_OpenInBrowser">
+                        <Hyperlink.Inlines>
+                            issue page
+                        </Hyperlink.Inlines>
+                    </Hyperlink>
+                    .
+                </TextBlock>
+            </StackPanel>
         </Grid>
         
         <Grid Name="AppGrid"  Visibility="Collapsed">
@@ -27,8 +41,8 @@
             <cefSharp:ChromiumWebBrowser Grid.Column="1" Name="LexosBrowser" Address="http://127.0.0.1:5000/" Visibility="Collapsed" />
 
         </Grid>
-        
-        <Grid Name="LoadingGrid">
+
+        <Grid Name="LoadingGrid" Visibility="Visible">
             <mahAppControls:ProgressRing Name="WaitingPythonLoadingRing" Foreground="LightSkyBlue"></mahAppControls:ProgressRing>
             <TextBlock FontSize="18" FontWeight="Bold" Name="InfomationTextBlock" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="40"> initializing components... </TextBlock>
         </Grid>

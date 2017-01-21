@@ -42,29 +42,39 @@ namespace LexosWindows
 
         private async void MainWindow_ContentRendered(object sender, EventArgs eventArgs)
         {
-            // find lexos.py file path
-            InfomationTextBlock.Text = "Finding Lexos Path...";
-            GetLexosLocation();
+            try
+            {
+                // find lexos.py file path
+                InfomationTextBlock.Text = "Finding Lexos Path...";
+                GetLexosLocation();
 
-            // find anaconda 
-            InfomationTextBlock.Text = "Finding Anaconda Path...";
-            GetAnacondaLocation();
+                // find anaconda 
+                InfomationTextBlock.Text = "Finding Anaconda Path...";
+                GetAnacondaLocation();
 
-            // intall required modules 
-            InfomationTextBlock.Text = "checking and installing requirements...";
-            await Task.Run(() => InstallPythonModule());
+                // intall required modules 
+                InfomationTextBlock.Text = "checking and installing requirements...";
+                await Task.Run(() => InstallPythonModule());
 
-            // starting python
-            InfomationTextBlock.Text = "Starting Python...";
-            StartMainProcess();
+                // starting python
+                InfomationTextBlock.Text = "Starting Python...";
+                StartMainProcess();
 
-            // wait until localhost:5000 is live
-            InfomationTextBlock.Text = "Initiallizing...";
-            await Task.Run(() => TestConnectionHelper());
+                // wait until localhost:5000 is live
+                InfomationTextBlock.Text = "Initiallizing...";
+                await Task.Run(() => TestConnectionHelper());
 
-            // display elements
-            LoadingGrid.Visibility = Visibility.Collapsed;
-            AppGrid.Visibility = Visibility.Visible;
+                // display elements
+                LoadingGrid.Visibility = Visibility.Collapsed;
+                AppGrid.Visibility = Visibility.Visible;
+            }
+            catch (Exception e)
+            {
+                LoadingGrid.Visibility = Visibility.Collapsed;
+                ErrorGrid.Visibility = Visibility.Visible;
+                ErrorDetailTextBlock.Text = $"{e.GetType()}: {e.Message}";
+            }
+            
 
         }
 
@@ -79,6 +89,12 @@ namespace LexosWindows
             {
                 LexosBrowser.Back();
             }
+        }
+
+        private void HyperLink_OpenInBrowser(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
 
         private void GetLexosLocation()
@@ -173,7 +189,6 @@ namespace LexosWindows
 
             MainProcess.Start();
         }
-
 
     }
 }
