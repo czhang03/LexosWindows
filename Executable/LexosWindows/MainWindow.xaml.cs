@@ -89,7 +89,7 @@ namespace LexosWindows
             LexosRequirementLocation = @"C:\Users\zcsxo\GithubRepos\Lexos\requirement.txt";
         }
 
-        public void GetAnacondaLocation()
+        private void GetAnacondaLocation()
         {
             var homefolderPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             var defaultAnacondaPath = Path.Combine(homefolderPath, "Anaconda3", "python.exe");
@@ -109,7 +109,7 @@ namespace LexosWindows
         }
 
 
-        public void InstallPythonModule()
+        private void InstallPythonModule()
         {
             var pipProcess = new Process()
             {
