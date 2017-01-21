@@ -17,6 +17,7 @@ using Microsoft.Win32;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
+using CefSharp;
 using Path = System.IO.Path;
 
 namespace LexosWindows
@@ -132,6 +133,11 @@ namespace LexosWindows
                     SocketType.Stream,
                     ProtocolType.Tcp);
 
+                if (MainProcess.HasExited)
+                {
+                    throw new HttpListenerException(1, "the main python process has exited");
+                }
+
                 try
                 {
                     s.Connect("127.0.0.1", 5000);
@@ -162,5 +168,12 @@ namespace LexosWindows
             MainProcess.Start();
         }
 
+        private void ChromiumBack_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (LexosBrowser.CanGoBack)
+            {
+                LexosBrowser.Back();
+            }
+        }
     }
 }
