@@ -93,13 +93,26 @@ InstallDir "$LOCALAPPDATA\${APP_NAME}"
 !insertmacro MUI_LANGUAGE "English"
 
 ######################################################################
-
-# anaconda install Section
+# anaconda install section
 Section "Install Anaconda" AnacondaSec
-SetOutPath "$TEMP\LexosInstaller\${ANACONDA_FILE}"
-File "${ANACONDA_FILE}"
-ExecWait "${ANACONDA_FILE} /S /D=$\"$PROFILE\Anaconda3$\""
+
+    # check the commandline parameter
+    !include "FileFunc.nsh"
+    ${GetParameters} $R0  # get the command line variable and then pass it in R1
+    ${GetOptions} $R0 "/noAnaconda" $R1  # check if '/noAnaconda' is in R0, if not raise an error. R1 is a trash variable
+    IfErrors 0 SkipAnaconda  # if previous command raise error, then jump 0 line, else go to SkipAnaconda label
+
+    SetOutPath "$TEMP\LexosInstaller\${ANACONDA_FILE}"
+    File "${ANACONDA_FILE}"
+    DetailPrint "Installing Anaconda, this can take 5-30 minutes depends on your machine"
+    SetDetailsPrint none
+    ExecWait "${ANACONDA_FILE} /S /D=$\"C:\tools\Anaconda3$\""
+    SetDetailsPrint both
+
+    SkipAnaconda:  # SkipAnaconda label
 SectionEnd
+
+
 
 # description of the section
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
