@@ -10,21 +10,26 @@
         Title="Lexos" Height="800" Width="1200" Closing="MainWindow_OnClosing" ContentRendered="MainWindow_ContentRendered">
     <Grid>
         
-        <Grid Name="ErrorGrid" Visibility="Visible">
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid Name="ErrorGrid" Visibility="Collapsed">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 
-                <TextBlock FontWeight="Bold" FontSize="20"> Following Error Encountered while initializing the app:</TextBlock>
-                <TextBlock Name="ErrorDetailTextBlock" Margin="5" FontSize="18" FontFamily="consolas" Foreground="MediumVioletRed">ErrorType: ErrorMessage</TextBlock>
+                <Image Name="FunImage" Source="Assets/SadBugFace.png" Height="100" Margin="30"></Image>
+                
+                <StackPanel Name="MessagePanel" VerticalAlignment="Center">
+                    
+                    <TextBlock FontWeight="Bold" FontSize="20"> Following Error Encountered while initializing the app:</TextBlock>
+                    <TextBlock Name="ErrorDetailTextBlock" Margin="5" FontSize="18" FontFamily="consolas" Foreground="MediumVioletRed">ErrorType: ErrorMessage</TextBlock>
 
-                <TextBlock FontSize="20">
-                    If you want you can submit log and contact us through our 
-                    <Hyperlink NavigateUri="https://github.com/chantisnake/LexosWindows/issues/new" RequestNavigate="HyperLink_OpenInBrowser">
-                        <Hyperlink.Inlines>
-                            issue page
-                        </Hyperlink.Inlines>
-                    </Hyperlink>
-                    .
-                </TextBlock>
+                    <TextBlock FontFamily="Gill Sans MT" FontSize="20">
+                        If you want you can submit log and contact us through our 
+                        <Hyperlink NavigateUri="https://github.com/chantisnake/LexosWindows/issues/new" RequestNavigate="HyperLink_OpenInBrowser">
+                            <Hyperlink.Inlines>
+                                issue page
+                            </Hyperlink.Inlines>
+                        </Hyperlink>
+                        .
+                    </TextBlock>
+                </StackPanel>
             </StackPanel>
         </Grid>
         
@@ -42,7 +47,7 @@
 
         </Grid>
 
-        <Grid Name="LoadingGrid" Visibility="Collapsed">
+        <Grid Name="LoadingGrid" Visibility="visible">
             <mahAppControls:ProgressRing Name="WaitingPythonLoadingRing" Foreground="LightSkyBlue"></mahAppControls:ProgressRing>
             <TextBlock FontSize="18" FontWeight="Bold" Name="InfomationTextBlock" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="40"> initializing components... </TextBlock>
         </Grid>
