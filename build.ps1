@@ -151,13 +151,17 @@ $installerTemplate = Get-Content "InstallScriptTemplate.nsi"
 $webClient = New-Object System.Net.WebClient
 $webClient.Headers.Add("user-agent", [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox) 
 
+# download
+Write-Host "Downloading Anaconda 32 bits" -ForegroundColor Yellow
+Write-Verbose "Downloading $anacondaDownloadLink32 to $PWD\build\$anacondaName32"
+$webClient.DownloadFile($anacondaDownloadLink32, "$PWD\build\$anacondaName32")  # download anaconda for the installer to pack
+
+Write-Host "Downloading Anaconda 64 bits" -ForegroundColor Yellow
+Write-Verbose "Downloading $anacondaDownloadLink64 to $PWD\build\$anacondaName64"
+$webClient.DownloadFile($anacondaDownloadLink32, "$PWD\build\$anacondaName64")  # download anaconda for the installer to pack
 
 # write and build the installer script for x86
 $installScriptOutputPathx86 = "./build/InstallScriptx86.nsi"
-
-Write-Host "Downloading Anaconda 32 bits" -ForegroundColor Yellow
-Write-Verbose "Downloading $anacondaDownloadLink32 to $PWD/build/$anacondaName32"
-$webClient.DownloadFile($anacondaDownloadLink32, "./build/$anacondaName32")  # download anaconda for the installer to pack
 
 $installScriptx86 = $installerTemplate.Replace("{{PlatformName}}", "x86").Replace("{{Version}}", $Version).Replace("{{anacondaVersion}}", $AnacondaVersion)
 Out-File -FilePath $installScriptOutputPathx86 -InputObject $installScriptx86 -Encoding utf8  # write
@@ -167,10 +171,6 @@ Start-Process -FilePath $nsisMakeFile -ArgumentList $installScriptOutputPathx86 
 
 # write and build the installer script for x64
 $installScriptOutputPathx64 = "./build/InstallScriptx64.nsi"
-
-Write-Host "Downloading Anaconda 64 bits" -ForegroundColor Yellow
-Write-Verbose "Downloading $anacondaDownloadLink64 to $PWD/build/$anacondaName64"
-$webClient.DownloadFile($anacondaDownloadLink32, "./build/$anacondaName64")  # download anaconda for the installer to pack
 
 $installScriptx86 = $installerTemplate.Replace("{{PlatformName}}", "x64").Replace("{{Version}}", $Version).Replace("{{anacondaVersion}}", $AnacondaVersion)
 Out-File -FilePath $installScriptOutputPathx64 -InputObject $installScriptx86 -Encoding utf8
@@ -191,7 +191,7 @@ foreach ($folder in $foldersToExclude) {
     Move-Item -Path "Lexo.Bak\$folder" -Destination "Lexos\$folder" -Force
 }
 
-Remove-Item "Lexos.bak"
+Remove-Item "Lexos.Bak"
 
 
 Set-Location $CurrentLocation
