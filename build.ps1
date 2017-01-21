@@ -131,11 +131,11 @@ Write-Verbose "Location Moves to $PWD"
 
 # 32 bits
 Write-Host "compiling Executable for x86 system"
-Start-Process -FilePath $MSBuildFile -ArgumentList "/property:Configuration=Release /property:Platform=x86 /verbosity:minimal" -NoNewWindow | Out-Null
+Start-Process -FilePath $MSBuildFile -ArgumentList "/property:Configuration=Release /property:Platform=x86 /verbosity:minimal" -NoNewWindow
 
 # 64 bits
 Write-Host "compiling Executable for x64 system"
-Start-Process -FilePath $MSBuildFile -ArgumentList "/property:Configuration=Release /property:Platform=x64 /verbosity:minimal" -NoNewWindow | Out-Null
+Start-Process -FilePath $MSBuildFile -ArgumentList "/property:Configuration=Release /property:Platform=x64 /verbosity:minimal" -NoNewWindow
 
 
 ################################ Building the installer
