@@ -72,7 +72,14 @@ namespace LexosWindows
         {
             MainProcess?.Kill();
         }
-        
+
+        private void ChromiumBack_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (LexosBrowser.CanGoBack)
+            {
+                LexosBrowser.Back();
+            }
+        }
 
         private void GetLexosLocation()
         {
@@ -167,12 +174,6 @@ namespace LexosWindows
             MainProcess.Start();
         }
 
-        private void ChromiumBack_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (LexosBrowser.CanGoBack)
-            {
-                LexosBrowser.Back();
-            }
-        }
+
     }
 }
