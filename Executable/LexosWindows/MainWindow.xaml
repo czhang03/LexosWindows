@@ -42,8 +42,14 @@
             
             <Button VerticalAlignment="Top" Name="ChromiumBack" Grid.Column="0" Click="ChromiumBack_OnClick" Background="Transparent" BorderBrush="Transparent">
                 <Image Source="Assets/back-button.png" Width="40"></Image>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <TextBlock>go back to the previous page</TextBlock>
+                    </ToolTip>
+                </Button.ToolTip>
             </Button>
-            <cefSharp:ChromiumWebBrowser Grid.Column="1" Name="LexosBrowser" Address="http://127.0.0.1:5000/" Visibility="Collapsed" />
+            
+            <cefSharp:ChromiumWebBrowser Grid.Column="1" Name="LexosBrowser" Address="http://127.0.0.1:5000/"/>
 
         </Grid>
 
