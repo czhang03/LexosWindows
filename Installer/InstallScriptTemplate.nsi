@@ -182,7 +182,7 @@ WriteRegStr ${REG_ROOT} "${UNINSTALL_PATH}"  "DisplayIcon" "$INSTDIR\${MAIN_APP_
 WriteRegStr ${REG_ROOT} "${UNINSTALL_PATH}"  "DisplayVersion" "${VERSION}"
 WriteRegStr ${REG_ROOT} "${UNINSTALL_PATH}"  "Publisher" "${COMP_NAME}"
 WriteRegStr ${REG_ROOT} "${APP_INFO_PATH}" "LexosPyLocation" "$INSTDIR\scr\lexos.py"
-WriteRegStr ${REG_ROOT} "${APP_INFO_PATH}" "LexosReqLocation" "$INSTDIR\scr\Reqirement.txt"
+WriteRegStr ${REG_ROOT} "${APP_INFO_PATH}" "LexosReqLocation" "$INSTDIR\scr\requirement.txt"
 
 !ifdef WEB_SITE
 WriteRegStr ${REG_ROOT} "${UNINSTALL_PATH}"  "URLInfoAbout" "${WEB_SITE}"
