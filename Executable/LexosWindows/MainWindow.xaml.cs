@@ -84,7 +84,11 @@ namespace LexosWindows
 
         private void MainWindow_OnClosing(object sender, CancelEventArgs e)
         {
-            MainProcess?.Kill();
+            if (!MainProcess.HasExited)
+            {
+                MainProcess.Kill();
+            }
+            
         }
 
         private void ChromiumBack_OnClick(object sender, RoutedEventArgs e)
