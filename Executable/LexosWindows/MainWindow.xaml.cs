@@ -32,7 +32,9 @@ namespace LexosWindows
         public string LexosPyLocation { get; set; }
         public string LexosRequirementLocation { get; set; }
 
-        readonly string anacondaPythonRegKey = @"SOFTWARE\Python\ContinuumAnalytics\Anaconda35-64\InstallPath";
+        readonly string anacondaPythonRegKeyPath = @"SOFTWARE\Python\ContinuumAnalytics\Anaconda35-64\InstallPath";
+        readonly string lexosInfoRegKeyPath = @"SOFTWARE\Lexos";
+
 
         public MainWindow()
         {
@@ -101,10 +103,20 @@ namespace LexosWindows
 
         private void GetLexosLocation()
         {
-            var programFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-            var defaultLexosLocation = Path.Combine(programFilePath, "lexos", "lexos.py");
-            LexosPyLocation = @"C:\Users\zcsxo\GithubRepos\Lexos\lexos.py";
-            LexosRequirementLocation = @"C:\Users\zcsxo\GithubRepos\Lexos\requirement.txt";
+            var ApplicationDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            var defaultLexosLocation = Path.Combine(ApplicationDataFolder, "lexos", "scr");
+            LexosPyLocation = Path.Combine(defaultLexosLocation, "lexos.py");
+            LexosRequirementLocation = Path.Combine(defaultLexosLocation, "requirement.txt");
+
+            try
+            {
+                var anacondaKey = Registry.CurrentUser.OpenSubKey(anacondaPythonRegKeyPath);
+                AnacondaExePath = (string)anacondaKey.GetValue("ExecutablePath");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("using the default anaconda path");
+            }
         }
 
         private void GetAnacondaLocation()
@@ -116,8 +128,9 @@ namespace LexosWindows
             AnacondaExePath = defaultAnacondaPath;
             try
             {
-                var anacondaKey = Registry.LocalMachine.OpenSubKey(anacondaPythonRegKey);
-                AnacondaExePath = (string)anacondaKey.GetValue("ExecutablePath");
+                var lexosInfoKey = Registry.LocalMachine.OpenSubKey(lexosInfoRegKeyPath);
+                LexosPyLocation = (string)lexosInfoKey.GetValue("LexosPyLocation");
+                LexosRequirementLocation = (string) lexosInfoKey.GetValue("LexosReqLocation");
             }
             catch (Exception)
             {
