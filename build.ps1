@@ -64,7 +64,7 @@ else
         # let user confirm and install nsis
         if ($PSCmdlet.ShouldProcess($env:COMPUTERNAME, "install MSBuild")) 
         {
-            Start-Process -FilePath "cint.exe" -ArgumentList "nsis -yf"
+            Start-Process -FilePath "cint.exe" -ArgumentList "nsis -yf" -Wait
         }
 
         # if nsis is not installed
@@ -90,7 +90,7 @@ else
         # let user confirm and install msbuild
         if ($PSCmdlet.ShouldProcess($env:COMPUTERNAME, "install MSBuild")) 
         {
-            Start-Process -FilePath "cint.exe" -ArgumentList "microsoft-build-tools -yf"
+            Start-Process -FilePath "cint.exe" -ArgumentList "microsoft-build-tools -yf" -Wait
         }
 
          # if msbuild is not installed
@@ -131,11 +131,11 @@ Write-Verbose "Location Moves to $PWD"
 
 # 32 bits
 Write-Host "compiling Executable for x86 system"
-Start-Process -FilePath $MSBuildFile -ArgumentList "/property:Configuration=Release /property:Platform=x86 /verbosity:minimal" -NoNewWindow
+Start-Process -FilePath $MSBuildFile -ArgumentList "/property:Configuration=Release /property:Platform=x86 /verbosity:minimal" -NoNewWindow -Wait
 
 # 64 bits
 Write-Host "compiling Executable for x64 system"
-Start-Process -FilePath $MSBuildFile -ArgumentList "/property:Configuration=Release /property:Platform=x64 /verbosity:minimal" -NoNewWindow
+Start-Process -FilePath $MSBuildFile -ArgumentList "/property:Configuration=Release /property:Platform=x64 /verbosity:minimal" -NoNewWindow -Wait
 
 
 ################################ Building the installer
@@ -164,7 +164,7 @@ $installScriptOutputPathx86 = "./build/InstallScriptx86.nsi"
 $installScriptx86 = $installerTemplate.Replace("{{PlatformName}}", "x86").Replace("{{Version}}", $Version).Replace("{{anacondaVersion}}", $AnacondaVersion)
 Out-File -FilePath $installScriptOutputPathx86 -InputObject $installScriptx86 -Encoding utf8  # write
 
-Start-Process -FilePath $nsisMakeFile -ArgumentList $installScriptOutputPathx86 -NoNewWindow # build
+Start-Process -FilePath $nsisMakeFile -ArgumentList $installScriptOutputPathx86 -Wait -NoNewWindow # build
 
 
 # write and build the installer script for x64
@@ -173,7 +173,7 @@ $installScriptOutputPathx64 = "./build/InstallScriptx64.nsi"
 $installScriptx86 = $installerTemplate.Replace("{{PlatformName}}", "x64").Replace("{{Version}}", $Version).Replace("{{anacondaVersion}}", $AnacondaVersion)
 Out-File -FilePath $installScriptOutputPathx64 -InputObject $installScriptx86 -Encoding utf8
 
-Start-Process -FilePath $nsisMakeFile -ArgumentList $installScriptOutputPathx64 -NoNewWindow # build
+Start-Process -FilePath $nsisMakeFile -ArgumentList $installScriptOutputPathx64 -Wait -NoNewWindow # build
 
 
 
