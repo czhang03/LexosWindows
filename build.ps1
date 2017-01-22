@@ -12,8 +12,8 @@ param (
 $nsisMakeFile = "C:\Program Files (x86)\NSIS\makensis.exe"
 $MSBuildFile = "C:\Program Files (x86)\MSBuild\14.0\Bin\amd64\MSBuild.exe"
 $foldersToExclude = @("TestSuite", ".git", ".github", "0_InstallGuides", "1_DevDocs", "2_InTheMargins", "deprecated")
-$anacondaDownloadLink64 = "https://repo.continuum.io/archive/Anaconda3-{0:version}-Windows-x86_64.exe" -f $AnacondaVersion
-$anacondaDownloadLink32 = "https://repo.continuum.io/archive/Anaconda3-{0:version}-Windows-x86.exe" -f $AnacondaVersion
+$anacondaDownloadLink64 = "http://repo.continuum.io/archive/Anaconda3-{0:version}-Windows-x86_64.exe" -f $AnacondaVersion
+$anacondaDownloadLink32 = "http://repo.continuum.io/archive/Anaconda3-{0:version}-Windows-x86.exe" -f $AnacondaVersion
 $anacondaName64 = "Anaconda3-{0:version}-Windows-x86.exe" -f $AnacondaVersion
 $anacondaName32 = "Anaconda3-{0:version}-Windows-x64.exe" -f $AnacondaVersion
 
@@ -144,19 +144,18 @@ Set-Location "$PSScriptRoot/installer"
 Write-Verbose "Location Moves to $PWD"
 
 # prepare
-New-Item -ItemType Directory -Path "build" -Confirm:$false -Force
+New-Item -ItemType Directory -Path "build" -Confirm:$false -Force | Out-Null
 $installerTemplate = Get-Content "InstallScriptTemplate.nsi"
-$webClient = New-Object System.Net.WebClient
-$webClient.Headers.Add("user-agent", [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox) 
 
 # download
 Write-Host "Downloading Anaconda 32 bits" -ForegroundColor Yellow
 Write-Verbose "Downloading $anacondaDownloadLink32 to $PWD\build\$anacondaName32"
-$webClient.DownloadFile($anacondaDownloadLink32, "$PWD\build\$anacondaName32")  # download anaconda for the installer to pack
+Start-BitsTransfer -Source $anacondaDownloadLink32 -Destination "$PWD\build\$anacondaName32" -Description "Downlaoding Anaconda 32 bits"
 
 Write-Host "Downloading Anaconda 64 bits" -ForegroundColor Yellow
 Write-Verbose "Downloading $anacondaDownloadLink64 to $PWD\build\$anacondaName64"
-$webClient.DownloadFile($anacondaDownloadLink32, "$PWD\build\$anacondaName64")  # download anaconda for the installer to pack
+Start-BitsTransfer -Source $anacondaDownloadLink64 -Destination "$PWD\build\$anacondaName64" -Description "Downlaoding Anaconda 64 bits"
+
 
 # write and build the installer script for x86
 $installScriptOutputPathx86 = "./build/InstallScriptx86.nsi"
@@ -189,7 +188,7 @@ foreach ($folder in $foldersToExclude) {
     Move-Item -Path "Lexo.Bak\$folder" -Destination "Lexos\$folder" -Force
 }
 
-Remove-Item "Lexos.Bak"
+Remove-Item "Lexo.Bak"
 
 
 Set-Location $CurrentLocation
