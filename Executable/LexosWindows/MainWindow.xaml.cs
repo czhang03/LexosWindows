@@ -108,15 +108,19 @@ namespace LexosWindows
             LexosPyLocation = Path.Combine(defaultLexosLocation, "lexos.py");
             LexosRequirementLocation = Path.Combine(defaultLexosLocation, "requirement.txt");
 
+            // get the anaconda executable path
             try
             {
-                var anacondaKey = Registry.CurrentUser.OpenSubKey(anacondaPythonRegKeyPath);
-                AnacondaExePath = (string)anacondaKey.GetValue("ExecutablePath");
+                var lexosInfoKey = Registry.CurrentUser.OpenSubKey(lexosInfoRegKeyPath);
+                LexosPyLocation = (string)lexosInfoKey.GetValue("LexosPyLocation");
+                LexosRequirementLocation = (string)lexosInfoKey.GetValue("LexosReqLocation");
             }
             catch (Exception)
             {
-                Console.WriteLine("using the default anaconda path");
+                Console.WriteLine("using the default Lexos path");
             }
+
+
         }
 
         private void GetAnacondaLocation()
@@ -124,17 +128,14 @@ namespace LexosWindows
             var homefolderPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             var defaultAnacondaPath = Path.Combine(homefolderPath, "Anaconda3", "python.exe");
 
-            // get the anaconda executable path
-            AnacondaExePath = defaultAnacondaPath;
             try
             {
-                var lexosInfoKey = Registry.LocalMachine.OpenSubKey(lexosInfoRegKeyPath);
-                LexosPyLocation = (string)lexosInfoKey.GetValue("LexosPyLocation");
-                LexosRequirementLocation = (string) lexosInfoKey.GetValue("LexosReqLocation");
+                var anacondaKey = Registry.LocalMachine.OpenSubKey(anacondaPythonRegKeyPath);
+                AnacondaExePath = (string)anacondaKey.GetValue("ExecutablePath");
             }
             catch (Exception)
             {
-                Console.WriteLine("using the default anaconda path");
+                Console.WriteLine("using the default Anaconda path");
             }
 
         }
