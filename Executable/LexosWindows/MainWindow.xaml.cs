@@ -152,16 +152,18 @@ namespace LexosWindows
                 StartInfo =
                 {
                     FileName = AnacondaExePath,
-                    Arguments = $"-m pip install -r {LexosRequirementLocation}",
+                    Arguments = $"-m pip install -r {LexosRequirementLocation}", 
                     CreateNoWindow = true,
                     RedirectStandardOutput = true,
+                    RedirectStandardError = true,
                     UseShellExecute = false,
                 }
             };
 
             pipProcess.Start();
+            string output = pipProcess.StandardOutput.ReadToEnd();
+            string Error = pipProcess.StandardError.ReadToEnd();
             pipProcess.WaitForExit();
-
         }
 
         private void TestConnectionHelper()
