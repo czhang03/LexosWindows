@@ -17,11 +17,6 @@ $anacondaDownloadLink32 = "http://repo.continuum.io/archive/Anaconda3-{0:version
 $anacondaName64 = "Anaconda3-{0:version}-Windows-x86.exe" -f $AnacondaVersion
 $anacondaName32 = "Anaconda3-{0:version}-Windows-x64.exe" -f $AnacondaVersion
 
-# start up
-Write-Host "init git submodule" -ForegroundColor Yellow
-git submodule init
-Write-Host "update git submodule" -ForegroundColor Yellow
-git submodule update
 
 ############### check the existence of the build environment 
 
