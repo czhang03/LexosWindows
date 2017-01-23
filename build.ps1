@@ -1,4 +1,3 @@
-
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param (
     [Parameter(Mandatory = $true, Position = 0)]
@@ -7,6 +6,7 @@ param (
     [string] $AnacondaVersion
 )
 
+Import-Module BitsTransfer
 
 # constants
 $nsisMakeFile = "C:\Program Files (x86)\NSIS\makensis.exe"
