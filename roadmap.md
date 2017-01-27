@@ -1,3 +1,5 @@
+- [] make the exe to search for both HKLM and HKCU to find anaconda (HKCU is the default)
+- [] fix the problem that anaconda always installed in the program file folder
 - [] better host output in build.ps1
 - [] implementing logging in the executable
 - [] run `nuget restore` automatically in build script
