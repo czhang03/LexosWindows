@@ -135,8 +135,24 @@ namespace LexosWindows
 
             try
             {
-                var anacondaKey = Registry.LocalMachine.OpenSubKey(anacondaPythonRegKeyPath);
-                AnacondaExePath = (string)anacondaKey.GetValue("ExecutablePath");
+                RegistryKey anacondaKey = null;  // init the reg key
+
+                var currentUserAnacondaKey = Registry.CurrentUser.OpenSubKey(anacondaPythonRegKeyPath);
+                var localMachineAnacondakey = Registry.LocalMachine.OpenSubKey(anacondaPythonRegKeyPath);
+
+                if (currentUserAnacondaKey != null)
+                {
+                    AnacondaExePath = (string)currentUserAnacondaKey.GetValue("ExecutablePath");
+                }
+                else if (localMachineAnacondakey != null)
+                {
+                    AnacondaExePath = (string)localMachineAnacondakey.GetValue("ExecutablePath");
+                }
+                else
+                {
+                    Console.WriteLine("using the default anaconda path");
+                }
+
             }
             catch (Exception)
             {
