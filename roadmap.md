@@ -4,4 +4,5 @@
 - [ ] better host output in build.ps1
 - [ ] implementing logging in the executable
 - [ ] run `nuget restore` automatically in build script
+- [ ] add publish script to publish assets to github
 - [x] appveryor environment tweak (it is not happy with submodule)
