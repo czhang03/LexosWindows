@@ -6,6 +6,7 @@ param (
     [string] $AnacondaVersion
 )
 
+################################ helper function and constants ################################
 function Start-DownloadFile($url, $targetFile)
 {
    $uri = New-Object "System.Uri" "$url"
@@ -36,8 +37,8 @@ function Start-DownloadFile($url, $targetFile)
 $nsisMakeFile = "C:\Program Files (x86)\NSIS\makensis.exe"
 $MSBuildFile = "C:\Program Files (x86)\MSBuild\14.0\Bin\amd64\MSBuild.exe"
 $foldersToExclude = @("TestSuite", ".git", ".github", "0_InstallGuides", "1_DevDocs", "2_InTheMargins", "deprecated")
-$anacondaDownloadLink64 = "https://repo.continuum.io/archive/Anaconda3-{0:version}-Windows-x86_64.exe" -f $AnacondaVersion
-$anacondaDownloadLink32 = "https://repo.continuum.io/archive/Anaconda3-{0:version}-Windows-x86.exe" -f $AnacondaVersion
+$anacondaDownloadLink64 = "https://repo.continuum.io/archive/Anaconda2-{0:version}-Windows-x86_64.exe" -f $AnacondaVersion
+$anacondaDownloadLink32 = "https://repo.continuum.io/archive/Anaconda2-{0:version}-Windows-x86.exe" -f $AnacondaVersion
 $anacondaName64 = "Anaconda3-{0:version}-Windows-x86.exe" -f $AnacondaVersion
 $anacondaName32 = "Anaconda3-{0:version}-Windows-x64.exe" -f $AnacondaVersion
 

@@ -1,4 +1,4 @@
 [submodule "Lexos"]
 	path = Lexos
 	url = https://github.com/WheatonCS/Lexos
-        branch = py3
+        branch = master
