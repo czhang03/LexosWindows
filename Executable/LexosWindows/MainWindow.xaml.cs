@@ -87,6 +87,8 @@ namespace LexosWindows
             if (!MainProcess.HasExited)
             {
                 MainProcess.Kill();
+                string output = MainProcess.StandardOutput.ReadToEnd();
+                string Error = MainProcess.StandardError.ReadToEnd();
             }
             
         }
@@ -222,6 +224,7 @@ namespace LexosWindows
                     Arguments = LexosPyLocation,
                     CreateNoWindow = true,
                     RedirectStandardOutput = true,
+                    RedirectStandardError = true,
                     UseShellExecute = false
                 }
             };
