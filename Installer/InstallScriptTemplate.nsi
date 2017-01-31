@@ -107,7 +107,7 @@ Section "Install Anaconda" AnacondaSec
     File "${ANACONDA_FILE}"
     DetailPrint "Installing Anaconda, this can take 5-30 minutes depends on your machine"
     SetDetailsPrint none
-    ExecWait "${ANACONDA_FILE} /S /D=$\"C:\tools\Anaconda3$\""
+    ExecWait '${ANACONDA_FILE} /S /D="C:\tools\Anaconda2" /InstallationType=JustMe /AddToPath=0 /RegisterPython=1'
     SetDetailsPrint both
 
     SkipAnaconda:  # SkipAnaconda label
