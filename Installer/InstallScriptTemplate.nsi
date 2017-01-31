@@ -103,7 +103,7 @@ Section "Install Anaconda" AnacondaSec
     ${GetOptions} $R0 "/noAnaconda" $R1  # check if '/noAnaconda' is in R0, if not raise an error. R1 is a trash variable
     IfErrors 0 SkipAnaconda  # if previous command raise error, then jump 0 line, else go to SkipAnaconda label
 
-    SetOutPath "$TEMP\LexosInstaller\${ANACONDA_FILE}"
+    SetOutPath "$TEMP\LexosInstaller\"
     File "${ANACONDA_FILE}"
     DetailPrint "Installing Anaconda, this can take 5-30 minutes depends on your machine"
     SetDetailsPrint none
