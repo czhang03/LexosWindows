@@ -39,8 +39,8 @@ $MSBuildFile = "C:\Program Files (x86)\MSBuild\14.0\Bin\amd64\MSBuild.exe"
 $foldersToExclude = @("TestSuite", ".git", ".github", "0_InstallGuides", "1_DevDocs", "2_InTheMargins", "deprecated")
 $anacondaDownloadLink64 = "https://repo.continuum.io/archive/Anaconda2-{0:version}-Windows-x86_64.exe" -f $AnacondaVersion
 $anacondaDownloadLink32 = "https://repo.continuum.io/archive/Anaconda2-{0:version}-Windows-x86.exe" -f $AnacondaVersion
-$anacondaName64 = "Anaconda2-{0:version}-Windows-x86.exe" -f $AnacondaVersion
-$anacondaName32 = "Anaconda2-{0:version}-Windows-x64.exe" -f $AnacondaVersion
+$anacondaName64 = "Anaconda2-{0:version}-Windows-x64.exe" -f $AnacondaVersion
+$anacondaName32 = "Anaconda2-{0:version}-Windows-x86.exe" -f $AnacondaVersion
 
 
 ############### check the existence of the build environment 
