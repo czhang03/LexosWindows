@@ -132,7 +132,7 @@ namespace LexosWindows
         private void GetAnacondaLocation()
         {
             var homefolderPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            var defaultAnacondaPath = Path.Combine(homefolderPath, "Anaconda3", "python.exe");
+            var defaultAnacondaPath = Path.Combine(homefolderPath, "Anaconda2", "python.exe");
             AnacondaExePath = defaultAnacondaPath;
 
             try

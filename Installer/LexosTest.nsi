@@ -10,7 +10,7 @@
 !define LICENSE_TXT "..\Lexos\LICENSE"
 !define INSTALLER_NAME "LexosInstaller_${VERSION}_x64.exe"
 !define MAIN_APP_EXE "LexosWindows.exe"
-!define ANACONDA_FILE "Anaconda3-4.2.0-Windows-x86_64.exe"
+!define ANACONDA_FILE "Anaconda2-4.2.0-Windows-x86_64.exe"
 !define INSTALL_TYPE "SetShellVarContext all"
 !define REG_ROOT "HKLM"
 !define REG_APP_PATH "Software\Microsoft\Windows\CurrentVersion\App Paths\${MAIN_APP_EXE}"
@@ -106,7 +106,7 @@ Section "Install Anaconda" AnacondaSec
     File "${ANACONDA_FILE}"
     DetailPrint "Installing Anaconda, this can take 5-30 minutes depends on your machine"
     SetDetailsPrint none
-    ExecWait "${ANACONDA_FILE} /S /D=$\"C:\tools\Anaconda3$\""
+    ExecWait '$TEMP\LexosInstaller\${ANACONDA_FILE} /InstallationType=JustMe /AddToPath=0 /RegisterPython=1 /S /D=$PROFILE\Anaconda2'
     SetDetailsPrint both
 
     SkipAnaconda:  # SkipAnaconda label
