@@ -32,7 +32,7 @@ namespace LexosWindows
         public string LexosPyLocation { get; set; }
         public string LexosRequirementLocation { get; set; }
 
-        readonly string anacondaPythonRegKeyPath = @"SOFTWARE\Python\ContinuumAnalytics\Anaconda35-64\InstallPath";
+        readonly string anacondaPythonRegKeyPath = @"SOFTWARE\Python\ContinuumAnalytics\Anaconda27-64\InstallPath";
         readonly string lexosInfoRegKeyPath = @"SOFTWARE\Lexos";
 
 
