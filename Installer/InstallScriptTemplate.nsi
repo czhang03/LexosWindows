@@ -8,6 +8,8 @@
 !define COPYRIGHT "WheatonCS � 2016"
 !define DESCRIPTION "Python/Flask-based website for text analysis workflow."
 !define LICENSE_TXT "..\..\Lexos\LICENSE"
+!define ICON_PATH "..\..\Lexos\install\assets\Lexos.ico"
+!define WELCOME_IMAGE_PATH "..\LexosTree.bmp"
 !define INSTALLER_NAME "LexosInstaller_${VERSION}_{{PlatformName}}.exe"
 !define MAIN_APP_EXE "LexosWindows.exe"
 !define ANACONDA_FILE "Anaconda2-{{anacondaVersion}}-Windows-{{PlatformName}}.exe"
@@ -51,8 +53,8 @@ InstallDir "$LOCALAPPDATA\${APP_NAME}"
 !define MUI_UNABORTWARNING
 
 # cutomize the images
-!define MUI_ICON "..\..\Lexos\install\assets\Lexos.ico"
-!define MUI_WELCOMEFINISHPAGE_BITMAP "..\LexosTree.bmp"
+!define MUI_ICON "${ICON_PATH}"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "${WELCOME_IMAGE_PATH}"
 
 # welcome page
 !insertmacro MUI_PAGE_WELCOME
@@ -103,11 +105,11 @@ Section "Install Anaconda" AnacondaSec
     ${GetOptions} $R0 "/noAnaconda" $R1  # check if '/noAnaconda' is in R0, if not raise an error. R1 is a trash variable
     IfErrors 0 SkipAnaconda  # if previous command raise error, then jump 0 line, else go to SkipAnaconda label
 
-    SetOutPath "$TEMP\LexosInstaller\${ANACONDA_FILE}"
+    SetOutPath "$TEMP\LexosInstaller\"
     File "${ANACONDA_FILE}"
     DetailPrint "Installing Anaconda, this can take 5-30 minutes depends on your machine"
     SetDetailsPrint none
-    ExecWait "${ANACONDA_FILE} /S /D=$\"C:\tools\Anaconda2$\""
+    ExecWait '$TEMP\LexosInstaller\${ANACONDA_FILE} /InstallationType=JustMe /AddToPath=0 /RegisterPython=1 /S /D=$PROFILE\Anaconda2'
     SetDetailsPrint both
 
     SkipAnaconda:  # SkipAnaconda label
