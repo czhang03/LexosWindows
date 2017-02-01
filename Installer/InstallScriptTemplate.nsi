@@ -8,6 +8,8 @@
 !define COPYRIGHT "WheatonCS � 2016"
 !define DESCRIPTION "Python/Flask-based website for text analysis workflow."
 !define LICENSE_TXT "..\..\Lexos\LICENSE"
+!define ICON_PATH "..\..\Lexos\install\assets\Lexos.ico"
+!define WELCOME_IMAGE_PATH "..\LexosTree.bmp"
 !define INSTALLER_NAME "LexosInstaller_${VERSION}_{{PlatformName}}.exe"
 !define MAIN_APP_EXE "LexosWindows.exe"
 !define ANACONDA_FILE "Anaconda3-{{anacondaVersion}}-Windows-{{PlatformName}}.exe"
@@ -51,8 +53,8 @@ InstallDir "$LOCALAPPDATA\${APP_NAME}"
 !define MUI_UNABORTWARNING
 
 # cutomize the images
-!define MUI_ICON "..\..\Lexos\install\assets\Lexos.ico"
-!define MUI_WELCOMEFINISHPAGE_BITMAP "..\LexosTree.bmp"
+!define MUI_ICON "${ICON_PATH}"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "${WELCOME_IMAGE_PATH}"
 
 # welcome page
 !insertmacro MUI_PAGE_WELCOME
