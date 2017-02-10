@@ -116,7 +116,7 @@ SectionEnd
 
 # description of the section
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-    !insertmacro MUI_DESCRIPTION_TEXT ${AnacondaSec} "This option will let you to install Anaconda with Lexos. Anaconda is a python distribution required by lexos. $\nIf you uncheck this option, you will need to install python by yourself."
+    !insertmacro MUI_DESCRIPTION_TEXT ${AnacondaSec} "This option will install the Python programming language, which is required by Lexos, using the Anaconda distribution of Python (https://www.continuum.io/anaconda-overview).  $\nUncheck this option if you already have Anaconda installed on your system or if you wish to install Python and Lexos' Python dependencies yourself. Information on installing Python and dependencies separately can be found at under the Manual Installers heading at http://wheatoncollege.edu/lexomics/lexos-installers/."
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 ######################################################################
