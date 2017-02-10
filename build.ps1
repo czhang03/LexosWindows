@@ -48,14 +48,14 @@ $anacondaName32 = "Anaconda3-{0:version}-Windows-x86.exe" -f $AnacondaVersion
 if (Get-Command choco.exe -ErrorAction SilentlyContinue) 
 {
     Write-Host "chocolatey found" -ForegroundColor Green
-    Write-Host "if any requirement is missing will be installed using choco" -ForegroundColor Yellow
+    Write-Host "If any requirement is missing, it will be installed using choco." -ForegroundColor Yellow
     Write-Host ''
     $chocoExist = $true
 }
 else 
 {
     Write-Host "chocolatey not found" -ForegroundColor Green
-    $installChocoResponce = Read-Host "do you want to install it? enter ([Y]es/[N]o)"
+    $installChocoResponce = Read-Host "Do you want to install it? Enter ([Y]es/[N]o)"
 
     if ($installChocoResponce.ToLower().StartsWith("y")) 
     {
@@ -65,7 +65,7 @@ else
     }
     else 
     {
-        Write-Host "skipping choco, if there is any requirement missing the script will stop" -ForegroundColor Yellow
+        Write-Host "Skipping choco. If there is any requirement missing, the script will stop." -ForegroundColor Yellow
         $chocoExist = $false
     }
 }
@@ -73,11 +73,11 @@ else
 # check for nsis make
 if (Test-Path $nsisMakeFile) 
 {
-    Write-Host "nsis make file found" -ForegroundColor Green
+    Write-Host "nsis make file found." -ForegroundColor Green
 }
 else 
 {
-    Write-Warning "nsis make file not found"
+    Write-Warning "nsis make file not found."
     if ($chocoExist) 
     {   
         # let user confirm and install nsis
@@ -87,11 +87,11 @@ else
         }
 
         # if nsis is not installed
-        if (Test-Path $nsisMakeFile) {Write-Error -Category ResourceUnavailable -Message "requirement nsismake does not match"}
+        if (Test-Path $nsisMakeFile) {Write-Error -Category ResourceUnavailable -Message "Requirement nsismake does not match."}
     }
     else 
     {
-        Write-Error -Category ResourceUnavailable -Message "requirement nsismake does not match"
+        Write-Error -Category ResourceUnavailable -Message "Requirement nsismake does not match."
     }
     
 }
@@ -99,11 +99,11 @@ else
 # check for MSBuild
 if (Test-Path $MSBuildFile) 
 {
-    Write-Host "MSBuild file found" -ForegroundColor Green 
+    Write-Host "MSBuild file found." -ForegroundColor Green 
 }
 else 
 {
-    Write-Warning "nsis make file not found"
+    Write-Warning "nsis make file not found."
     if ($chocoExist) 
     {
         # let user confirm and install msbuild
@@ -113,11 +113,11 @@ else
         }
 
          # if msbuild is not installed
-        if (Test-Path $nsisMakeFile) {Write-Error -Category ResourceUnavailable -Message "requirement nsismake does not match"}
+        if (Test-Path $nsisMakeFile) {Write-Error -Category ResourceUnavailable -Message "Requirement nsismake does not match."}
     }
     else 
     {
-        Write-Error -Category ResourceUnavailable -Message "requirement nsismake does not exit"
+        Write-Error -Category ResourceUnavailable -Message "Requirement nsismake does not exist."
     }
     
 }
@@ -203,7 +203,7 @@ Write-Verbose "Location moves to $PWD"
 
 # moving the excluded folder to the backup folder
 foreach ($folder in $foldersToExclude) {
-    Write-Verbose "tempting to move $PWD\Lexos.bak\$folder to $PWD\$folder"
+    Write-Verbose "Attempting to move $PWD\Lexos.bak\$folder to $PWD\$folder"
     Move-Item -Path "Lexo.Bak\$folder" -Destination "Lexos\$folder" -Force
 }
 

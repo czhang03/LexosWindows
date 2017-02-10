@@ -55,7 +55,7 @@ namespace LexosWindows
                 GetAnacondaLocation();
 
                 // intall required modules 
-                InfomationTextBlock.Text = "checking and installing requirements...";
+                InfomationTextBlock.Text = "Checking and installing requirements...";
                 await Task.Run(() => InstallPythonModule());
 
                 // starting python
@@ -63,7 +63,7 @@ namespace LexosWindows
                 StartMainProcess();
 
                 // wait until localhost:5000 is live
-                InfomationTextBlock.Text = "Initiallizing...";
+                InfomationTextBlock.Text = "Initializing...";
                 await Task.Run(() => TestConnectionHelper());
 
                 // display elements
@@ -123,7 +123,7 @@ namespace LexosWindows
             }
             catch (Exception)
             {
-                Console.WriteLine("using the default Lexos path");
+                Console.WriteLine("Using the default Lexos path.");
             }
 
 
@@ -152,13 +152,13 @@ namespace LexosWindows
                 }
                 else
                 {
-                    Console.WriteLine("using the default anaconda path");
+                    Console.WriteLine("Using the default Anaconda path.");
                 }
 
             }
             catch (Exception)
             {
-                Console.WriteLine("using the default Anaconda path");
+                Console.WriteLine("Using the default Anaconda path.");
             }
 
         }
@@ -198,7 +198,7 @@ namespace LexosWindows
 
                 if (MainProcess.HasExited)
                 {
-                    throw new HttpListenerException(1, "the main python process has exited");
+                    throw new HttpListenerException(1, "The main python process has exited.");
                 }
 
                 try
